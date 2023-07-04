@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Gif search</h1>
+    <form id="search-form">
+        <input type="text" id="search-box">
+        <button id="submit-btn">Search</button>
+    </form>
+    <div id="img"></div>
+    <script>
+        const searchForm = document.getElementById("search-form")
+        const searchBox = document.getElementById("search-box")
+        const searchResult = document.getElementById("img")
+        const submitBtn = document.getElementById("submit-btn");
+
+        let q = document.getElementById("search-box").value;
+        const urlGif = fetch('http://api.giphy.com/v1/gifs/search?q=lion&api_key=nHU2KikQ58IVJJc80fDV67En77UqXPtW')
+        .then(res => {
+                return res.json()
+            }).then(res => { res.data.forEach(element => {
+                let img = document.createElement('img')
+                img.src = element.images.downsized.url;
+                searchResult.appendChild(img)
+                })
+            }).then(res => {console.log(res.data)}).catch(err => {console.log(err)})
+        
+    </script>
+</body>
+</html>
